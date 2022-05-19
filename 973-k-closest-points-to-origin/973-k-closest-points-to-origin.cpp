@@ -4,21 +4,26 @@ public:
     return (x * x) + (y * y);
 }
 
+
 vector<vector<int> > kClosest(vector<vector<int> >& points, int k) {
-    vector<pair<int, int> > distance;
+    //vector<pair<int, int> > distance;
+    priority_queue<pair<int, int>> maxHeap;
     int index = 0;
 
     for (auto point:points) {
-        distance.push_back(make_pair(calculateDistance(point[0], point[1]), index));
+        maxHeap.push(make_pair(calculateDistance(point[0], point[1]), index));
         index++;
+
+        if(maxHeap.size()>k){
+            maxHeap.pop();
+        }
     }
-    sort(distance.begin(), distance.end());
+    //sort(distance.begin(), distance.end());
     vector<vector<int> > ans;
 
-    index = 0;
-    while (index < k) {
-        ans.push_back(points[distance[index].second]);
-        index++;
+    while(!maxHeap.empty()){
+        ans.push_back(points[maxHeap.top().second]);
+        maxHeap.pop();
     }
 
     return ans;
