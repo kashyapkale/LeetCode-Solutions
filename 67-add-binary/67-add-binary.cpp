@@ -13,21 +13,13 @@ pair<char, char> getSingleDigitSum(char A, char B){
 	return make_pair('0', '1');
 }
 
-void computeExtraDigits(string &ans, string &s, char carry, int remainingLength){
-	while (remainingLength--) {
-		pair<char, char> currSum = getSingleDigitSum(s[remainingLength - 1], carry);
-		carry = currSum.first;
-		ans += currSum.second;
-	}
-}
 
 void addExtraDigits(string &s, int remainingLength){
 	while (remainingLength--)
 		s = '0' + s;
 }
 
-
-
+	
 string addBinary(string s1, string s2){
 	
 	char carry = '0';
@@ -41,7 +33,7 @@ string addBinary(string s1, string s2){
 		addExtraDigits(s1, remainingLength);
 	}
 
-    int len = max(s1.length(), s2.length());
+    	int len = max(s1.length(), s2.length());
 	while (len) {
 		pair<char, char> currSum1 = getSingleDigitSum(s1[len - 1], carry);
 		char tempCarry = currSum1.first, tempSum = currSum1.second;
