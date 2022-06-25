@@ -3,8 +3,8 @@ public:
 //BinarySum
 pair<char, char> getSingleDigitSum(char A, char B){
 	
-    if (A == '1' && B == '1')
-        return make_pair('1', '0');
+    	if (A == '1' && B == '1')
+        	return make_pair('1', '0');
     
 
 	if (A == '0' && B == '0')
@@ -13,13 +13,11 @@ pair<char, char> getSingleDigitSum(char A, char B){
 	return make_pair('0', '1');
 }
 
-
 void addExtraDigits(string &s, int remainingLength){
 	while (remainingLength--)
 		s = '0' + s;
 }
 
-	
 string addBinary(string s1, string s2){
 	
 	char carry = '0';
@@ -33,29 +31,22 @@ string addBinary(string s1, string s2){
 		addExtraDigits(s1, remainingLength);
 	}
 
-    	int len = max(s1.length(), s2.length());
+    int len = max(s1.length(), s2.length());
 	while (len) {
 		pair<char, char> currSum1 = getSingleDigitSum(s1[len - 1], carry);
 		char tempCarry = currSum1.first, tempSum = currSum1.second;
 		pair<char, char> currSum2 = getSingleDigitSum(tempSum, s2[len - 1]);
-		ans += currSum2.second;
+		ans = currSum2.second + ans;
 		carry = (currSum2.first == '1') ? '1':tempCarry;
         len--;
 	}
 	
 
 	if (carry == '1')
-		ans += '1';
+		ans = '1' + ans;
 
-	reverse(ans.begin(), ans.end());
+	
 	return ans;
 }
-
-//    abcdef
-//defghklmnr
-
-
-
-
 
 };
