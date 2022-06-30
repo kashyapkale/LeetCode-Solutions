@@ -24,11 +24,18 @@ int numDecodingsUtil(string s, int len, vector<int> &dp) {
     }
 
 
-    int singleDigit = (dp[len-2] == -1)?numDecodingsUtil(s.substr(1, len - 1), len - 1,dp) : dp[len-2];
+    int singleDigit = (dp[len-1] == -1)?numDecodingsUtil(s.substr(1, len - 1), len - 1,dp) : dp[len-1];
+    if(dp[len-1] == -1){
+            dp[len-1] = singleDigit;
+        }
+    
     int doubleDigit = 0;
 
     if (s.length() >= 2 && (stoi(s.substr(0, 2)) <= 26)) {
         doubleDigit = (dp[len-2] == -1)?numDecodingsUtil(s.substr(2, len - 2), len - 2,dp) : dp[len-2];
+        if(dp[len-2] == -1){
+            dp[len-2] = doubleDigit;
+        }
     }
 
     return dp[len] = singleDigit + doubleDigit;
