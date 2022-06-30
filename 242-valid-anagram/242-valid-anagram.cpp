@@ -7,20 +7,17 @@ bool isAnagram(string s, string t) {
     if (s.length() != t.length())
         return false;
 
-    for (char ch : s) {
-        charMap[ch - 'a']++;
+    for(int i = 0;i<s.length();i++){
+        charMap[s[i] - 'a']++;
+        charMap[t[i] - 'a']--;
     }
 
     for (char ch : t) {
-        if (charMap[ch - 'a'] > 0) {
-            charMap[ch - 'a']--;
-        }
-        else{
+        if (charMap[ch - 'a'] < 0) {
             return false;
         }
     }
 
     return true;
-
 }
 };
